@@ -52,5 +52,9 @@ class GoogleController extends Controller
             // probably you should return the reason to the user
             var_dump($e->getMessage());die;
         }
+
+        return $this->render('index.html.twig', [
+            'user' => $user->toArray()
+        ]);
     }
 }
