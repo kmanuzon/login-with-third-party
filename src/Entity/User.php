@@ -24,11 +24,6 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="string", unique=true)
-     */
-    private $apiKey;
-
-    /**
      * @ORM\Column(type="string", unique=true, nullable=true)
      */
     private $googleId;
