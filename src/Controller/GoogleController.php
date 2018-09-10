@@ -54,7 +54,10 @@ class GoogleController extends Controller
         }
 
         return $this->render('index.html.twig', [
-            'user' => $user->toArray()
+            'user' => $user->toArray(),
+            'year' => date('Y'),
+            'home_url' => $this->generateUrl('foobar'),
+            'logout_url' => $this->generateUrl('app_index')
         ]);
     }
 }

@@ -1,9 +1,64 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<style>
+.avatar {
+    max-height: 22px;
+    vertical-align: sub;
+    margin-right: 1px;
+}
+</style>
+{% endblock %}
+
 {% block body %}
 
-<pre>
-{{ dump(user) }}
-</pre>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="{{ home_url }}">3P Login Demo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ home_url }}">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="avatar" src="{{ user.image.url }}">
+                {% set firstEmail = user.emails|first %}
+                <span>{{ user.displayName }} &lt;{{ firstEmail.value }}&gt;</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown02">
+              <a class="dropdown-item" href="{{ logout_url }}">Logout</a>
+            </div>
+          </li>
+        </ul>
+    </form>
+
+  </div>
+</nav>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3 mt-5">Hello, {{ user.name.givenName }}!</h1>
+      <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <p><a class="btn btn-primary btn-lg" href="https://www.lipsum.com/" role="button">Learn more &raquo;</a></p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="container">
+    <p>&copy; {{ year }} progknife.tk</p>
+</footer>
 
 {% endblock %}
