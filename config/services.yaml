@@ -30,3 +30,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    app_google_authenticator:
+        class: App\Security\GoogleAuthenticator
+        autowire: true
+        # use autowiring, OR you can specify the argument manually
+        # arguments:
+        #     - '@oauth2.registry'
+        #     - '@doctrine.orm.entity_manager'
+        #     - '@router'

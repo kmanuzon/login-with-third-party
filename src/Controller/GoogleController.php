@@ -17,10 +17,8 @@ class GoogleController extends Controller
      */
     public function connectAction()
     {
-        // will redirect to Google!
-        return $this->get('oauth2.registry')
-            ->getClient('google') // key used in knpu_oauth2_client.yaml
-            ->redirect();
+
+        return $this->get('oauth2.registry')->getClient('google')->redirect();
     }
 
     /**
@@ -37,11 +35,13 @@ class GoogleController extends Controller
         // (read below)
 
         /** @var \KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient $client */
+        /*
         $client = $this->get('oauth2.registry')->getClient('google');
 
         try {
             // the exact class depends on which provider you're using
             /** @var \League\OAuth2\Client\Provider\GoogleUser $user */
+            /*
             $user = $client->fetchUser();
 
         } catch (IdentityProviderException $e) {
@@ -55,5 +55,6 @@ class GoogleController extends Controller
             'home_url' => $this->generateUrl('app_home'),
             'logout_url' => $this->generateUrl('app_index')
         ]);
+        */
     }
 }
