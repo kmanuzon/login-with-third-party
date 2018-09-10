@@ -20,6 +20,9 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('index.html.twig', []);
+        return $this->render('index.html.twig', [
+            'year' => date('Y'),
+            'google_sign_in_url' => $this->generateUrl('connect_google')
+        ]);
     }
 }
