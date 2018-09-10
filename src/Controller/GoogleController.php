@@ -48,13 +48,13 @@ class GoogleController extends Controller
 
             $logger->critical($e->getMessage());
         }
+        */
 
         return $this->render('home.html.twig', [
-            'user' => $user->toArray(),
+            'user' => $his->getUser(),//$user->toArray(),
             'year' => date('Y'),
             'home_url' => $this->generateUrl('app_home'),
             'logout_url' => $this->generateUrl('app_index')
         ]);
-        */
     }
 }
