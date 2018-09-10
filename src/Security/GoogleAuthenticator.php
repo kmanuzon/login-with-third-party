@@ -72,9 +72,10 @@ class GoogleAuthenticator extends SocialAuthenticator
         }
 
         // 2) do we have a matching user by email?
-        $user = $this->em->getRepository('App:User')->findOneBy(['email' => $email]);
+        $user = $this->em->getRepository('App:User')->findOneBy(['username' => $email]);
 
         // 3) Maybe you just want to "register" them by creating a User object
+        $user->setUsername($email);
         $user->setGoogleId($googleUser->getId());
         $this->em->persist($user);
         $this->em->flush();
