@@ -25,4 +25,31 @@ class IndexController extends Controller
             'google_sign_in_url' => $this->generateUrl('connect_google')
         ]);
     }
+    /**
+     * @Route("/home", name="app_home")
+     *
+     * @return Response
+     */
+    public function homeAction()
+    {
+        return $this->render('home.html.twig', [
+            'year' => date('Y'),
+            'home_url' => $this->generateUrl('app_home'),
+            'logout_url' => $this->generateUrl('app_index'),
+            'user' => [
+                'emails' => [
+                    ['value' => '']
+                ],
+                'id' => '',
+                'displayName' => '',
+                'name' => [
+                    'familyName' => '',
+                    'givenName' => ''
+                ],
+                'image' => [
+                    'url' => ''
+                ]
+            ]
+        ]);
+    }
 }

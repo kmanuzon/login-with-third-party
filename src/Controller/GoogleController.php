@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,34 +30,29 @@ class GoogleController extends Controller
      *
      * @Route("/connect/google/check", name="connect_google_check")
      */
-    public function connectCheckAction(Request $request)
+    public function connectCheckAction(Request $request, LoggerInterface $logger)
     {
         // ** if you want to *authenticate* the user, then
         // leave this method blank and create a Guard authenticator
         // (read below)
 
         /** @var \KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient $client */
-        $client = $this->get('oauth2.registry')
-            ->getClient('google');
+        $client = $this->get('oauth2.registry')->getClient('google');
 
         try {
             // the exact class depends on which provider you're using
             /** @var \League\OAuth2\Client\Provider\GoogleUser $user */
             $user = $client->fetchUser();
 
-            // do something with all this new power!
-            $user->getFirstName();
-            // ...
         } catch (IdentityProviderException $e) {
-            // something went wrong!
-            // probably you should return the reason to the user
-            var_dump($e->getMessage());die;
+
+            $logger->critical($e->getMessage());
         }
 
-        return $this->render('index.html.twig', [
+        return $this->render('home.html.twig', [
             'user' => $user->toArray(),
             'year' => date('Y'),
-            'home_url' => $this->generateUrl('foobar'),
+            'home_url' => $this->generateUrl('app_home'),
             'logout_url' => $this->generateUrl('app_index')
         ]);
     }
