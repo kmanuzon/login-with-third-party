@@ -17,7 +17,6 @@ class GoogleController extends Controller
      */
     public function connectAction()
     {
-
         return $this->get('oauth2.registry')->getClient('google')->redirect();
     }
 
@@ -30,33 +29,6 @@ class GoogleController extends Controller
      */
     public function connectCheckAction(Request $request, LoggerInterface $logger)
     {
-        // ** if you want to *authenticate* the user, then
-        // leave this method blank and create a Guard authenticator
-        // (read below)
-
-        /** @var \KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient $client */
-        /*
-        $client = $this->get('oauth2.registry')->getClient('google');
-
-        try {
-            // the exact class depends on which provider you're using
-            /** @var \League\OAuth2\Client\Provider\GoogleUser $user */
-            /*
-            $user = $client->fetchUser();
-
-        } catch (IdentityProviderException $e) {
-
-            $logger->critical($e->getMessage());
-        }
-        */
-
         return $this->redirectToRoute('app_home');
-
-        return $this->render('home.html.twig', [
-            'user' => $his->getUser(),//$user->toArray(),
-            'year' => date('Y'),
-            'home_url' => $this->generateUrl('app_home'),
-            'logout_url' => $this->generateUrl('app_index')
-        ]);
     }
 }
