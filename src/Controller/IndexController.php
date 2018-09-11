@@ -20,6 +20,11 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
+        if ($this->isGranted('ROLE_USER')) {
+
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('index.html.twig', [
             'year' => date('Y'),
             'google_sign_in_url' => $this->generateUrl('connect_google')
@@ -35,15 +40,8 @@ class IndexController extends Controller
         return $this->render('home.html.twig', [
             'year' => date('Y'),
             'home_url' => $this->generateUrl('app_home'),
-            'logout_url' => $this->generateUrl('app_index'),
+            'logout_url' => $this->generateUrl('app_logout'),
             'user' => $this->getUser()
         ]);
-    }
-    /**
-     * @Route("/admin")
-     */
-    public function admin()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
     }
 }

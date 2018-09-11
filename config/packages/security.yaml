@@ -12,7 +12,11 @@ security:
             security: false
         main:
             anonymous: true
-            logout: ~
+
+            logout:
+                invalidate_session: true
+                path: /logout
+                target: /
 
             guard:
                 authenticators:
@@ -31,4 +35,4 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/home, roles: ROLE_USER }
