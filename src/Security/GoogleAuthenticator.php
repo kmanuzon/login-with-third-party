@@ -61,8 +61,6 @@ class GoogleAuthenticator extends SocialAuthenticator
         /** @var GoogleUser $googleUser */
         $googleUser = $this->getGoogleClient()->fetchUserFromToken($credentials);
 
-        $email = $googleUser->getEmail();
-
         // 1) have they logged in with Google before? Easy!
         $existingUser = $this->em->getRepository('App:User')->findOneBy(['googleId' => $googleUser->getId()]);
 
@@ -72,7 +70,7 @@ class GoogleAuthenticator extends SocialAuthenticator
         }
 
         // 2) do we have a matching user by email?
-        $user = $this->em->getRepository('App:User')->findOneBy(['username' => $email]);
+        $user = $this->em->getRepository('App:User')->findOneBy(['username' => $googleUser->getEmail()]);
 
         if (null === $user) {
 
@@ -80,8 +78,12 @@ class GoogleAuthenticator extends SocialAuthenticator
         }
 
         // 3) Maybe you just want to "register" them by creating a User object
-        $user->setUsername($email);
+        $user->setUsername($googleUser->getEmail());
         $user->setGoogleId($googleUser->getId());
+        $user->setDisplayName($googleUser->getName());
+        $user->setFirstName($googleUser->getFirstName());
+        $user->setLastName($googleUser->getLastName());
+        $user->setAvatarUrl($googleUser->getAvatar());
         $this->em->persist($user);
         $this->em->flush();
 

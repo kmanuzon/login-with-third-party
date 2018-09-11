@@ -28,6 +28,27 @@ class User implements UserInterface
      */
     private $googleId;
 
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $displayName;
+
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $avatarUrl;
+
+
     public function getUsername()
     {
         return $this->username;
@@ -51,6 +72,46 @@ class User implements UserInterface
     public function setGoogleId($googleId)
     {
         $this->googleId = $googleId;
+    }
+
+    public function getDisplayName()
+    {
+        return $this->displayName;
+    }
+
+    public function setDisplayName($value)
+    {
+        $this->displayName = $value;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName($value)
+    {
+        $this->firstName = $value;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName($value)
+    {
+        $this->lastName = $value;
+    }
+
+    public function getAvatarUrl()
+    {
+        return $this->avatarUrl;
+    }
+
+    public function setAvatarUrl($value)
+    {
+        $this->avatarUrl = $value;
     }
 
     public function getPassword()

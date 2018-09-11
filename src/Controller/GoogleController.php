@@ -50,6 +50,8 @@ class GoogleController extends Controller
         }
         */
 
+        return $this->redirectToRoute('app_home');
+
         return $this->render('home.html.twig', [
             'user' => $his->getUser(),//$user->toArray(),
             'year' => date('Y'),

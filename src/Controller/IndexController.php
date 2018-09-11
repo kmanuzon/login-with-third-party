@@ -36,20 +36,7 @@ class IndexController extends Controller
             'year' => date('Y'),
             'home_url' => $this->generateUrl('app_home'),
             'logout_url' => $this->generateUrl('app_index'),
-            'user' => [
-                'emails' => [
-                    ['value' => '']
-                ],
-                'id' => '',
-                'displayName' => '',
-                'name' => [
-                    'familyName' => '',
-                    'givenName' => ''
-                ],
-                'image' => [
-                    'url' => ''
-                ]
-            ]
+            'user' => $this->getUser()
         ]);
     }
     /**
